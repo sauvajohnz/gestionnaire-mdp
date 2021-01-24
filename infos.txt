@@ -1,0 +1,6 @@
+#Version 1.0
+crédits: sauvajohn (discord:svjohn#2739)
+
+
+Le programme stock tous les identifiants de vos comptes en les cryptant.
+Le mot de passe pour décrypter n'est pas stocké, c'est vous qui devez le garder. 

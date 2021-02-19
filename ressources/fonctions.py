@@ -27,15 +27,15 @@ def decrypt(key: bytes, text: bytes):
 
 
 def ajouter_fichier(cle, nom_compte, mdp_compte, service_compte):
-    text = encrypt(cle.encode(), "{} {} {}".format(service_compte, nom_compte, mdp_compte).encode())
+    text = encrypt(cle.encode(), "{}|{}|{}".format(service_compte, nom_compte, mdp_compte).encode())
 
-    fichier = open("mdp.txt", "a")
+    fichier = open("ressources/mdp.txt", "a")
     fichier.write(f"\n{text.decode()}")
     fichier.close()
 
 
 def lire_fichier(cle):
-    fichier = open("mdp.txt", "r")
+    fichier = open("ressources/mdp.txt", "r")
     text = fichier.read().split("\n")
     identifiants_groupes = []
 
@@ -46,17 +46,18 @@ def lire_fichier(cle):
         print("Le mot de passe n'est pas bon!")
     except InvalidToken:
         print("Erreur dans le décodage des mots de passe, ce n'est surement pas le bon mot de passe!")
-
+    a_retourner = []
     for info in identifiants_groupes:
-        identifiants = info.split(" ")
+        identifiants = info.split("|")
         if info == "debut":
             None
         else:
-            print(f"Compte {identifiants[0]} : Username = {identifiants[1]}, Mot de passe = {identifiants[2]}")
+            a_retourner.append(identifiants)
+    return a_retourner
 
 
 def verifier_mdp(mdp):
-    fichier = open("mdp.txt", "r")
+    fichier = open("ressources/mdp.txt", "r")
     text = fichier.read().split("\n")
     identifiants_groupes = []
 
